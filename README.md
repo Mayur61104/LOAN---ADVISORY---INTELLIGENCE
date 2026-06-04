@@ -1,173 +1,221 @@
 # 🏦 Financial Loan Advisor Intelligence System
 
-An end-to-end AI-powered financial advisory system that combines Large Language Models (LLMs), Natural Language Processing (NLP), Machine Learning, and Explainable AI to simulate an intelligent loan advisor.
+An end-to-end AI-powered financial advisory platform that combines Large Language Models (LLMs), Machine Learning, Explainable AI, and conversational interfaces to simulate an intelligent loan advisor.
 
-The system allows users to describe their business and financial situation in plain English. An LLM extracts structured financial features from raw conversational text, an XGBoost model predicts loan eligibility, SHAP explains the decision, and another LLM converts the prediction into a human-like financial advisory response.
+The system allows users to describe their financial situation in natural language. An LLM extracts structured loan application features, an XGBoost model predicts loan eligibility, SHAP explains the prediction, and another LLM generates personalized financial recommendations.
 
-The application is deployed using Streamlit Cloud and designed as a real-world conversational AI + ML pipeline.
-
----
-
-# 🚀 Project Overview
-
-Traditional loan eligibility systems require users to manually fill long structured forms. This project reimagines that workflow using conversational AI.
-
-Example input:
-
-> "My shop earns around 60k per month, I need a 2 lakh loan to expand inventory, my credit history is good and I live in an urban area."
-
-The system automatically:
-1. Extracts structured financial features using an LLM
-2. Converts text into model-ready numerical inputs
-3. Predicts loan approval probability using XGBoost
-4. Explains the prediction using SHAP
-5. Generates a conversational financial advisory response
+The application is deployed using Streamlit and containerized with Docker for portable deployment.
 
 ---
 
-# 🧠 Core AI Pipeline
+# 🚀 Features
+
+* Conversational loan advisory system
+* Natural language financial input
+* LLM-based feature extraction
+* XGBoost loan eligibility prediction
+* SHAP explainability integration
+* Human-readable financial recommendations
+* Streamlit interactive interface
+* Dockerized deployment
+* Docker Hub image distribution
+* End-to-end AI + ML pipeline
+
+---
+
+# 🧠 System Architecture
 
 ```text
-User Natural Language Input
-              ↓
-NLP + Prompt Engineering
-              ↓
-LLM Feature Extraction
-              ↓
-Structured Financial Features
-              ↓
-XGBoost Loan Eligibility Model
-              ↓
-SHAP Explainability Layer
-              ↓
-LLM-Based Conversational Response
-              ↓
-Streamlit Frontend
+User Input (Natural Language)
+                │
+                ▼
+      Groq LLM Feature Extraction
+                │
+                ▼
+      Structured Financial Features
+                │
+                ▼
+      XGBoost Loan Prediction Model
+                │
+                ▼
+         SHAP Explainability
+                │
+                ▼
+      LLM Financial Recommendation
+                │
+                ▼
+         Streamlit Frontend
 ```
 
 ---
 
-# ✨ Features
+# 📊 Model Performance
 
-- Conversational financial advisory system
-- Natural language business input
-- Prompt-engineered LLM feature extraction
-- XGBoost-based loan approval prediction
-- SHAP explainability integration
-- Conversational AI response generation
-- Streamlit interactive frontend
-- End-to-end AI + ML pipeline
-- Real-time inference system
-- Human-like financial recommendation responses
+| Metric         | Score              |
+| -------------- | ------------------ |
+| Recall         | 93%                |
+| Model          | XGBoost Classifier |
+| Explainability | SHAP               |
+
+The model was trained using structured financial datasets and optimized through feature engineering and hyperparameter tuning.
 
 ---
 
-# 📌 Key Technologies Used
+# 📌 Tech Stack
 
-## AI & NLP
-- Large Language Models (LLMs)
-- Prompt Engineering
-- NLP Parsing
-- Conversational AI
+### AI & LLMs
 
-## Machine Learning
-- XGBoost
-- Scikit-learn
-- SHAP Explainability
+* Groq API
+* Prompt Engineering
+* NLP Parsing
+* Conversational AI
 
-## Backend & Deployment
-- Python
-- Streamlit
-- Groq API
-- Pickle Serialization
+### Machine Learning
 
-## Data Processing
-- Pandas
-- NumPy
+* XGBoost
+* Scikit-learn
+* SHAP
+
+### Backend & Deployment
+
+* Python
+* Streamlit
+* Docker
+* Docker Hub
+
+### Data Processing
+
+* Pandas
+* NumPy
 
 ---
 
 # 🔍 NLP Feature Extraction
 
-The system uses a prompt-engineered LLM parser to extract structured loan application features from raw user conversations.
+The system extracts structured loan application information from conversational user inputs.
 
 Extracted features include:
-- Applicant income
-- Co-applicant income
-- Loan amount
-- Loan term
-- Credit history
-- Education status
-- Employment type
-- Property area
-- Marital status
-- Dependents
 
-This removes the need for users to manually fill rigid financial forms.
+* Applicant Income
+* Co-applicant Income
+* Loan Amount
+* Loan Term
+* Credit History
+* Education
+* Employment Status
+* Property Area
+* Marital Status
+* Dependents
 
----
+Example:
 
-# 🤖 Machine Learning Model
+> "My shop earns around 60k per month, I need a 2 lakh loan to expand inventory, my credit history is good and I live in an urban area."
 
-The loan eligibility prediction engine is powered by:
-- XGBoost Classifier
-
-The model predicts:
-- Loan approval probability
-- Approval/rejection classification
-
-The system was trained using structured financial datasets and optimized for robust inference performance.
+Automatically becomes structured model-ready features for inference.
 
 ---
 
-# 📊 Explainable AI with SHAP
+# 📊 Explainable AI
 
 SHAP (SHapley Additive Explanations) is used to explain model predictions.
 
 The system identifies:
-- Which financial factors most influenced the decision
-- Positive vs negative contributors
-- Feature impact intensity
 
-This improves transparency and trustworthiness of the advisory system.
+* Positive contributing factors
+* Negative contributing factors
+* Relative feature importance
+* Financial indicators influencing approval decisions
 
----
-
-# 💬 Conversational AI Layer
-
-Instead of returning raw probabilities, the system generates:
-- Human-readable financial advice
-- Conversational responses
-- Actionable suggestions for improving loan eligibility
-
-Example:
-- Explaining why a loan was rejected
-- Suggesting improvements in credit profile
-- Highlighting strong financial indicators
-
-This creates a more realistic financial advisory experience.
+This improves transparency and trustworthiness of recommendations.
 
 ---
 
-# 🖥️ Frontend
+# 🖥️ Running Locally
 
-Built using Streamlit for:
-- Interactive conversational interface
-- Real-time responses
-- User-friendly experience
-- Rapid deployment
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## Configure Environment Variables
+
+Create:
+
+```text
+apikey.env
+```
+
+Add:
+
+```text
+GROQ_API_KEY=your_api_key_here
+```
+
+## Run Application
+
+```bash
+streamlit run app.py
+```
 
 ---
 
-# ☁️ Deployment
+# 🐳 Docker Deployment
 
-The project is deployed using:
-- Streamlit Cloud
+## Pull Docker Image
 
-The architecture is designed to be extendable toward:
-- scalable AI systems
-- cloud-native deployment
-- enterprise financial advisory workflows
+```bash
+docker pull mayur61104/loan-advisor:latest
+```
+
+## Run Container
+
+```bash
+docker run --env-file apikey.env -p 8501:8501 mayur61104/loan-advisor:latest
+```
+
+Access the application at:
+
+```text
+http://localhost:8501
+```
+
+---
+
+## Build Docker Image Locally
+
+```bash
+docker build -t loan-advisor .
+```
+
+Run:
+
+```bash
+docker run --env-file apikey.env -p 8501:8501 loan-advisor
+```
+
+## Docker Hub
+
+Docker image:
+
+docker pull mayuricreates/loan-advisor-bot:latest
+
+Docker Hub Repository:
+https://hub.docker.com/r/mayuricreates/loan-advisor-bot
+
+---
+
+# 🔐 Security Notice
+
+Do not commit API keys to GitHub.
+
+Store credentials locally using:
+
+```text
+apikey.env
+```
+
+and provide them to the application through environment variables.
 
 ---
 
@@ -179,8 +227,10 @@ loan-advisor/
 ├── app.py
 ├── nlp_parser.py
 ├── train_model.py
+├── Dockerfile
 ├── requirements.txt
 ├── README.md
+├── apikey.env.example
 │
 ├── models/
 │   ├── model.pkl
@@ -195,73 +245,20 @@ loan-advisor/
 
 ---
 
-# ▶️ Running the Project
+# 🔮 Future Improvements
 
-## 1. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 2. Add API Key
-
-Create a file named:
-
-```text
-apikey.env
-```
-
-Add:
-
-```text
-GROQ_API_KEY=your_api_key_here
-```
-
----
-
-## 3. Run Streamlit App
-
-```bash
-streamlit run app.py
-```
-
----
-
-# 📈 Future Improvements
-
-- 🌍 Multilingual conversational support for regional language inputs
-- 🤖 Agentic AI workflows for multi-step financial reasoning
-- 🧠 Fine-tuning domain-specific financial language models
-- 📄 PDF financial statement analysis
-- 🔎 RAG-based financial knowledge retrieval
-- 🏦 Real-time banking and credit integrations
-- 🔐 User authentication and memory
-- ☁️ Full cloud-native deployment architecture
-- 🗂️ Vector database integration
-- 📊 Advanced financial risk scoring
-- 🎙️ Voice-based financial advisor
-- 📈 Personalized financial recommendation systems
-
----
-
-# 🎯 Learning Outcomes
-
-This project provided hands-on experience in:
-- NLP pipelines
-- Prompt engineering
-- LLM orchestration
-- Explainable AI
-- ML deployment
-- Conversational AI systems
-- Streamlit deployment
-- Feature engineering
-- End-to-end AI system design
-- Human-in-the-loop AI workflows
+* Agentic financial workflows
+* RAG-based financial knowledge retrieval
+* PDF financial statement analysis
+* Multilingual support
+* Voice-enabled financial advisor
+* Cloud-native deployment
+* User authentication
+* Vector database integration
+* Personalized financial planning
 
 ---
 
 # 📬 Author
 
-Developed as an applied AI/ML project focused on combining conversational AI, explainable machine learning, and financial intelligence into a unified real-world advisory system.
+Developed as an applied AI/ML project focused on combining conversational AI, explainable machine learning, and financial intelligence into a production-oriented advisory platform.
