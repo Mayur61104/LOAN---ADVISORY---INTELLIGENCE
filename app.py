@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from pathlib import Path
 import pickle
 import shap
 import json
@@ -12,15 +13,31 @@ from groq import Groq
 import os 
 from dotenv import load_dotenv
 
-load_dotenv("/Users/apple/Desktop/loan-advisor/apikey.env") 
+st.set_page_config(
+    page_title="Loan Advisor",
+    page_icon="🏦",
+    layout="wide"
+)
+
+BASE_DIR = Path(__file__).parent
+
+load_dotenv(BASE_DIR / "apikey.env")
 client = Groq( api_key=os.getenv("GROQ_API_KEY") )
 
 @st.cache_resource
 def load_model():
-    model = pickle.load(open("/Users/apple/Desktop/loan-advisor/models/model.pkl", "rb"))
-    explainer = pickle.load(open("/Users/apple/Desktop/loan-advisor/models/explainer.pkl", "rb"))
-    features = pickle.load(open("/Users/apple/Desktop/loan-advisor/models/features.pkl", "rb"))
-    return model, explainer, features
+    BASE_DIR = Path(__file__).parent
+    MODELS_DIR = BASE_DIR / "models"
+
+    with open(MODELS_DIR / "model.pkl", "rb") as f:
+        model = pickle.load(f)
+
+    with open(MODELS_DIR / "explainer.pkl", "rb") as f:
+        explainer = pickle.load(f)
+
+    with open(MODELS_DIR / "features.pkl", "rb") as f:
+        features = pickle.load(f)
+        return model, explainer, features
 
 model, explainer, feature_names = load_model()
 
@@ -122,7 +139,6 @@ def generate_response(user_msg, prediction, probability, shap_lines, parsed):
         temperature=0.7
         )
         return response.choices[0].message.content
-st.set_page_config(page_title="Loan Advisor", page_icon="🏦")
 st.title("Financial Loan Advisor")
 st.caption("Describe your business and loan needs in plain English")
 

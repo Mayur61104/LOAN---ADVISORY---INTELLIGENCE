@@ -5,9 +5,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.preprocessing import LabelEncoder
 import shap
+from pathlib import Path
 import pickle
 
-df = pd.read_csv("/Users/apple/Desktop/loan-advisor/data/train.csv")
+BASE_DIR = Path(__file__).parent
+df = pd.read_csv(BASE_DIR / "data" / "train.csv")
 
 df["Gender"].fillna("Male", inplace=True)
 df["Married"].fillna("Yes", inplace=True)
@@ -51,8 +53,13 @@ print(classification_report(y_test, preds))
 
 explainer = shap.TreeExplainer(model)
 
-pickle.dump(model, open("/Users/apple/Desktop/loan-advisor/models/model.pkl", "wb"))
-pickle.dump(explainer, open("/Users/apple/Desktop/loan-advisor/models/explainer.pkl", "wb"))
-pickle.dump(features, open("/Users/apple/Desktop/loan-advisor/models/features.pkl", "wb"))
+BASE_DIR = Path(__file__).parent
+
+MODELS_DIR = BASE_DIR / "models"
+MODELS_DIR.mkdir(exist_ok=True)
+
+pickle.dump(model, open(MODELS_DIR / "model.pkl", "wb"))
+pickle.dump(explainer, open(MODELS_DIR / "explainer.pkl", "wb"))
+pickle.dump(features, open(MODELS_DIR / "features.pkl", "wb"))
 
 print("Model, explainer, and features saved.")

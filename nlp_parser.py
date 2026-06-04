@@ -2,7 +2,10 @@ from groq import Groq
 import os
 from dotenv import load_dotenv
 
-load_dotenv("/Users/apple/Desktop/loan-advisor/apikey.env")
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+load_dotenv(BASE_DIR / "apikey.env")
 
 client = Groq(
     api_key=os.getenv("GROQ_API_KEY")
